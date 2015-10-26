@@ -1,5 +1,6 @@
 module vision
 
-# package code goes here
+include("features.jl")
+include("visualization.jl")
 
 end # module
