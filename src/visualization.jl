@@ -24,6 +24,15 @@ function show_matches(a::Image, b::Image, matches)
     end
 end
 
+# Helper function to go from images to correspondences
+function show_matches(a::Image, b::Image)
+    ca, da = vision.sift(a)
+    cb, db = vision.sift(b)
+    matches, _ = find_matches(da, db, 0.5)
+    coords = indices_to_coordinates(ca[1:2, :], cb[1:2, :], matches)
+    show_matches(a, b, coords)
+end
+
 # Concatenate images so we can use ImageView annotations to draw lines
 function sidebyside(a::Image, b::Image)
     prop = a.properties
